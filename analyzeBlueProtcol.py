@@ -1,4 +1,6 @@
+#!/usr/bin/python
 #-*- utf-8 --*-
+
 import Analyze_csvfile
 import sys
 import struct
@@ -66,11 +68,15 @@ def ACLPKT_print(handle, length, data):
     pass
 
 def CMD_print(opcode, cmd_len, cmd_data):
-    code_num = int(opcode[0],16) + (int(opcode[1], 16) << 8)
-    len_num  = int(cmd_len[0], 16) 
+    code_num = (int(opcode[0],16 ) << 8) + (int(opcode[1], 16) )
+
+    OCF =  ( int(opcode[1], 16) & 0xfc) >> 2
+    OGF =  ( int(opcode[0], 16) ) + ( int(opcode[1] ,16) & 0x03 << 8)
+    len_num  = int(str(cmd_len), 16) 
 
     print "#### command packet ####"
-    print "code: 0x%02x len:0x%02x"%(code_num, len_num)
+    print str(cmd_len), 
+    print "OGF:0x%03x  OCF: 0x%02x  len:0x%02x"%(OGF, OCF, len_num)
     print "data: ",
     for char in cmd_data:
         print char,
