@@ -1,0 +1,37 @@
+#!/usr/bin/python
+#-*- utf-8 -*-
+
+Error_State ={
+		0x01: "Unknow HCI Cmd",		
+		0x02: "Unknow Connection Identifiler",
+		0x03: "Handware Failure",
+		0x04: "Page Timeout",
+		0x05: "Authentication Failure",
+		0x06: "PIN or key Missing",
+		0x07: "Memory Capacity Exceeded",
+		0x08: "Connection Timeout",
+		0x09: "Connection Limit Exceeded",
+		0x0a: "Sync Conn Limit to Device Exceeded",
+		0x0b: "ACL Conn Already Exits",
+		0x0c: "CMD Disallowed",
+		0x0d: "Limit Resources",
+		0x0e: "Security Reasons",
+		0x0f: "Unacceptable BD_ADDR",
+		0x10: "Conn Accept Timeout Exceeded",
+		0x11: "Unsuported Feature or Parameter Value",
+		0x12: "Invilid HCI Command Parameters",
+		0x13: "Remote user Terminated Conn",
+		0x14: "Low Resources",
+		0x15: "Power Off",
+		0x16: "Conn Terminated by local host",
+		0x17: "Repeated Attempts",
+		0x18: "Pairing not Allowed",
+		0x19: "Unknow LMP PDU",
+		0x1a: "Unsuport Remote Frature",
+		0x1b: "SCO offset Rejected",
+		0x1c: "SCO interval Rejected",
+		0x1d: "SCO Air Mode Rejected",
+		0x1e: "Invalid LMP Paramters",
+		0x1f: "Unspecifiled Error",
+
+		}

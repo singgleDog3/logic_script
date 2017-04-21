@@ -7,7 +7,8 @@ import struct
 import os
 import string
 import array
-
+from Event import EventData_print
+import ACL
 
 # HCI command format
 # op_code(2 octets) + length(1 octets) + param
@@ -30,6 +31,7 @@ def HCIEvent_print(evcode, evlen, evdata):
     print 'data: ',
     for char in evdata:
         print char,
+    EventData_print(code_num, evdata)
     print "\n"
     pass
 
@@ -38,12 +40,15 @@ def ACLData_Print(data):
     data_CID = int(data[2], 16) +  (int(data[3], 16) << 8 )
     data_pyload = data[4:]
 
-    print "__ ACL Data ___"
-    print 'len: 0x%04x  CID: 0x%04x '%(data_len, data_CID)
-    print 'data: ',
-    for char in data_pyload:
+    print "\n__ ACL Data ___"
+    print 'len: 0x%04x  CID: 0x%04x '%(data_len, data_CID),
+    print "data: ",
+    for char in data:
         print char,
-    print '\n'
+    print "\n"
+
+    ACL.ACL_Data(data, data_CID)
+
 
 def ACLPKT_print(handle, length, data):
     print "##### ACL Packet ####"
@@ -63,20 +68,20 @@ def ACLPKT_print(handle, length, data):
     print 'data: ',
     for char in data:
         print char,
-    print ''
+
     ACLData_Print(data)
     pass
 
 def CMD_print(opcode, cmd_len, cmd_data):
     code_num = (int(opcode[0],16 ) << 8) + (int(opcode[1], 16) )
 
-    OCF =  ( int(opcode[1], 16) & 0xfc) >> 2
-    OGF =  ( int(opcode[0], 16) ) + ( int(opcode[1] ,16) & 0x03 << 8)
+    OGF =  ( int(opcode[1], 16) & 0xfc) >> 2
+    OCF =  ( int(opcode[0], 16) ) + ( int(opcode[1] ,16) & 0x03 << 8)
     len_num  = int(str(cmd_len), 16) 
 
     print "#### command packet ####"
     print str(cmd_len), 
-    print "OGF:0x%03x  OCF: 0x%02x  len:0x%02x"%(OGF, OCF, len_num)
+    print "OGF:0x%02x  OCF: 0x%03x  len:0x%02x"%(OGF, OCF, len_num)
     print "data: ",
     for char in cmd_data:
         print char,
@@ -87,7 +92,7 @@ def Analyze(filename):
     fops = open(filename)
     file_content = fops.readlines()
     split_content = [] 
-
+    current_num = 0
     
     current_place = 0
 
