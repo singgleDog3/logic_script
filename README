@@ -2,4 +2,5 @@
 recover the message for the csv file which load out from the logic analyzer, and analyze the new file (acl pkt and event pkt)
 Add Command Packet
 
-
+### 2017-4-21
+remove the bug of display the commang length.
