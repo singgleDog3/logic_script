@@ -45,7 +45,7 @@ def ACLData_Print(data):
     print "data: ",
     for char in data:
         print char,
-    print "\n"
+    print ""
 
     ACL.ACL_Data(data, data_CID)
 
